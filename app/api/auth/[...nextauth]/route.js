@@ -1,8 +1,7 @@
 import NextAuth from "next-auth";
-import GoogleProvider from 'next-auth/providers';
-import { connectToDB } from '@utils/database';
-import User from '@models/user';
-import profile from '@components/Profile';
+import GoogleProvider from 'next-auth/providers/google';
+import { connectToDB } from '../../../../utils/database';
+import User from '../../../../models/user';
 // const NextAuth = require("next-auth");
 
 const handler = NextAuth({

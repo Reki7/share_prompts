@@ -3,12 +3,14 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {ClientSafeProvider, getProviders, signIn, signOut} from "next-auth/react";
+import {ClientSafeProvider, getProviders, signIn, signOut, useSession} from "next-auth/react";
 import {LiteralUnion} from "next-auth/src/react/types";
 import {BuiltInProviderType} from "next-auth/src/providers";
 
 const Nav = () => {
-  const [isUserLogIn, setIsUserLogIn] = useState(true);
+  const { data: session } = useSession();
+  // const [isUserLogIn, setIsUserLogIn] = useState(true);
+
   const [providers, setProviders] = useState<Record<LiteralUnion<BuiltInProviderType>, ClientSafeProvider> | null>(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -28,7 +30,7 @@ const Nav = () => {
       </Link>
       {/* Desktop navigation */}
       <div className="sm:flex hidden">
-        { isUserLogIn
+        { session?.user
           ? (
             <div className="flex gap-3 md:gap-5">
               <Link href="/create-prompt" className="black_btn">
@@ -55,7 +57,7 @@ const Nav = () => {
       </div>
       {/* Desktop navigation */}
       <div className="sm:hidden flex relative">
-        {isUserLogIn
+        {session?.user
         ? (
             <div className="flex">
               <Image src="/assets/images/avatar.jpg" className="rounded-full" alt="avatar" width={37} height={37} onClick={() => setToggleDropdown(prev => !prev)} />
