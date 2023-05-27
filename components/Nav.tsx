@@ -40,7 +40,7 @@ const Nav = () => {
                 Sign Out
               </button>
               <Link href="/profile">
-                <Image src="/assets/images/avatar.jpg" className="rounded-full" alt="avatar" width={37} height={37}/>
+                <Image src={`${session?.user.image}`} className="rounded-full" alt="avatar" width={37} height={37}/>
               </Link>
             </div>
           )
@@ -60,7 +60,15 @@ const Nav = () => {
         {session?.user
         ? (
             <div className="flex">
-              <Image src="/assets/images/avatar.jpg" className="rounded-full" alt="avatar" width={37} height={37} onClick={() => setToggleDropdown(prev => !prev)} />
+              <Image
+                // src="/assets/images/avatar.jpg"
+                src={`${session?.user.image}`}
+                className="rounded-full"
+                alt="avatar"
+                width={37}
+                height={37}
+                onClick={() => setToggleDropdown(prev => !prev)}
+              />
               {toggleDropdown && (
                 <div className='dropdown'>
                   <Link href='/profile' className='dropdown_link' onClick={() => setToggleDropdown(false)}>
